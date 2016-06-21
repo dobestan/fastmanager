@@ -5,8 +5,12 @@ var Lecture = require('../models/lecture');
 
 
 router.get('/', function(request, response) {
-  // # FIXME: should return lectures list
-  return response.send("lectures:list");
+  Lecture.getLectures(function(error, lectures) {
+    if (error) throw error;
+    return response.render("lectures/index", {
+      lectures: lectures
+    });
+  });
 });
 
 
