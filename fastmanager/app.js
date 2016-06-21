@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
 
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
@@ -40,11 +41,29 @@ app.use(session({
   resave: true
 }));
 
+// Express Validator
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
 // Flash Messages
 app.use(flash());
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/', users);
 app.use('/lectures', lectures);
 
 // catch 404 and forward to error handler
