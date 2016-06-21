@@ -7,6 +7,13 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
 
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
+
+// MongoDB 데이터베이스 접속하기
+mongoose.connect('mongodb://localhost/fastmanager');
+var db = mongoose.connection;
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
