@@ -12,6 +12,9 @@ var async = require('async');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local'),Strategy;
+
 // MongoDB 데이터베이스 접속하기
 mongoose.connect('mongodb://localhost/fastmanager');
 var db = mongoose.connection;
@@ -41,6 +44,10 @@ app.use(session({
   saveUninitialized: true,
   resave: true
 }));
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Express Validator
 app.use(expressValidator({
