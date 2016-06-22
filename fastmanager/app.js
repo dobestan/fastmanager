@@ -62,6 +62,10 @@ app.use(expressValidator({
 
 // Flash Messages
 app.use(flash());
+app.use(function (request, response, next) {
+  response.locals.messages = require('express-messages')(request, response);
+  next();
+});
 
 app.use('/', routes);
 app.use('/', users);
