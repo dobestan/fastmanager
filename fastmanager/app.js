@@ -74,6 +74,17 @@ app.use(function (request, response, next) {
   next();
 });
 
+
+app.get('*', function(request, response, next) {
+  response.locals.user = request.user || null;
+
+  if (request.user) {
+    response.locals.type = request.user.type;
+  }
+  next();
+});
+
+
 app.use('/', routes);
 app.use('/', users);
 app.use('/lectures', lectures);
