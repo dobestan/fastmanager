@@ -7,6 +7,7 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
+var async = require('async');
 
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
