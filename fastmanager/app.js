@@ -6,9 +6,14 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
+var async = require('async');
 
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+
+var passport = require('passport');
+var LocalStrategy = require('passport-local'),Strategy;
 
 // MongoDB 데이터베이스 접속하기
 mongoose.connect('mongodb://localhost/fastmanager');
@@ -40,11 +45,48 @@ app.use(session({
   resave: true
 }));
 
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Express Validator
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
 // Flash Messages
 app.use(flash());
+app.use(function (request, response, next) {
+  response.locals.messages = require('express-messages')(request, response);
+  next();
+});
+
+
+app.get('*', function(request, response, next) {
+  response.locals.user = request.user || null;
+
+  if (request.user) {
+    response.locals.type = request.user.type;
+  }
+  next();
+});
+
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/', users);
 app.use('/lectures', lectures);
 
 // catch 404 and forward to error handler
