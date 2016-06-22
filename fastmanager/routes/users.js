@@ -67,4 +67,59 @@ router.post('/signup', function(request, response) {
 });
 
 
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+
+
+passport.deserializeUser(function(id, done) {
+  User.getUserById(id, function (err, user) {
+    done(err, user);
+  });
+});
+
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.getUserByUsername(username, function(error, user){
+      if (error) throw error;
+      if(!user){
+        return done(null, false, { message: username + " 에 해당하는 유저 정보를 찾을 수 없습니다." });
+      }
+
+      User.comparePassword(password, user.password, function(error, isMatch) {
+        if (error) return done(error);
+        if(isMatch) {
+          return done(null, user);
+        } else {
+          return done(null, false, { message: '비밀번호가 올바르지 않습니다.' });
+        }
+      });
+    });
+  }
+));
+
+
+router.get("/login/", function(request, response) {
+  return response.render("users/login");
+});
+
+
+router.post("/login/", passport.authenticate('local', {failureRedirect:'/login/', failureFlash: true}), function(request, response) {
+    request.flash('success','성공적으로 로그인 되었습니다.');
+    var userType = request.user.type;
+
+    // FIXME: should return valid lectures view
+    // return response.redirect('/'+userYype+'s/classes');
+    return response.redirect("/");
+});
+
+
+router.get('/logout/', function(request, response) {
+  request.logout();
+  request.flash('success', "성공적으로 로그아웃 되었습니다.");
+    return response.redirect('/');
+});
+
+
 module.exports = router;
