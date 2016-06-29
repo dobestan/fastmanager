@@ -6,8 +6,17 @@ block content
         div.row
             h1 로그인
 
-            form(action="/login/" method="POST")
-                input(type="text" name="username" placeholder="아이디")
-                input(type="password" name="password" placeholder="비밀번호")
+            div.col.s12
+                form(action="/login/" method="POST")
+                    div.row
+                        div.input-field
+                            input(type="text" name="username")
+                            label(for="username") 아이디 
 
-                input(type="submit" value="로그인")
+                        div.input-field
+                            input(type="password" name="password")
+                            label(for="username") 비밀번호
+
+                        div.input-field
+                            button.btn.waves-effect.waves-light
+                                input(type="submit" value="로그인")
