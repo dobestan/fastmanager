@@ -2,10 +2,12 @@ extends ../layout
 
 
 block content
-    h1 수업 추가하기
+    div.container
+        div.row
+            h1 수업 추가하기
 
-    form(action="" method="POST")
-        input(type="text" name="lesson_number" placeholder="수업 번호" required)
-        input(type="text" name="lesson_title" placeholder="수업 제목" required)
-        textarea(name="lesson_body" placeholder="수업 본문")
-        input(type="submit" value="수업 추가하기")
+            form(action="" method="POST")
+                input(type="text" name="lesson_number" placeholder="수업 번호" required)
+                input(type="text" name="lesson_title" placeholder="수업 제목" required)
+                textarea(name="lesson_body" placeholder="수업 본문")
+                input(type="submit" value="수업 추가하기")

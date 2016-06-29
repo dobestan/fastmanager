@@ -2,10 +2,12 @@ extends ../layout
 
 
 block content
-    h1 로그인
+    div.container
+        div.row
+            h1 로그인
 
-    form(action="/login/" method="POST")
-        input(type="text" name="username" placeholder="아이디")
-        input(type="password" name="password" placeholder="비밀번호")
+            form(action="/login/" method="POST")
+                input(type="text" name="username" placeholder="아이디")
+                input(type="password" name="password" placeholder="비밀번호")
 
-        input(type="submit" value="로그인")
+                input(type="submit" value="로그인")

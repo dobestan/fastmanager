@@ -1,7 +1,14 @@
 header#header
-    h1 Header
+    nav.top-nav
+        div.container
+            div.nav-wrapper
+                a.page-title FastManager
 
-    ul
+    div.container
+        a(href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only")
+            i.material-icons menu
+
+    ul#nav-mobile.side-nav.fixed.full
         li
             a(href="/") 홈
         if (!user)
