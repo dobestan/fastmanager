@@ -4,3 +4,14 @@ extends ../layout
 block content
     h1= lecture.title
     p= lecture.description
+
+    if (user)
+        form(action="/" + type + "s/lectures/register/" method="POST")
+            input(type="hidden" name="student_id" value="" + user._id +"")
+            input(type="hidden" name="lecture_id" value="" + lecture._id + "")
+            input(type="hidden" name="lecture_title" value="" + lecture.title + "")
+            input(type="submit" value="수강신청")
+    else
+        p 본 강의에 등록하기 위해서는 로그인이 필요합니다.
+
+    a(href="/lectures/" + lecture._id + "/lessons/") 수업 자세히 살펴보기

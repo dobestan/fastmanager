@@ -1,0 +1,11 @@
+extends ../layout
+
+
+block content
+    h1 #{user.username}'s lectures <span>( #{ student.lectures.length}  )</span>
+
+    ul
+        for lecture in student.lectures
+            li
+                a(href="/lectures/" + lecture.lecture_id + "/")
+                    h3= lecture.lecture_title
