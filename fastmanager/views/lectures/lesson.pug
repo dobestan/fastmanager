@@ -1,0 +1,8 @@
+extends ../layout
+
+
+block content
+    h2
+        a(href="/lectures/" + lecture._id + "/")= lecture.title
+    h1= lesson.lesson_title
+    p= lesson.lesson_body
