@@ -12,3 +12,8 @@ header#header
         else
             li
                 a(href="/logout/") 로그아웃
+        li
+            a(href="/lectures/") 모든 강의 살펴보기
+        if (user)
+            li
+                a(href="/" + type + "s/lectures/") 내 강의 살펴보기
