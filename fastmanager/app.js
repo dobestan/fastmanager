@@ -16,7 +16,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local'),Strategy;
 
 // MongoDB 데이터베이스 접속하기
-mongoose.connect('mongodb://localhost/fastmanager');
+mongoose.connect('mongodb://mongodb.dobest.io/fastmanager');
 var db = mongoose.connection;
 
 var routes = require('./routes/index');
