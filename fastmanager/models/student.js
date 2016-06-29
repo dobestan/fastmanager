@@ -27,15 +27,4 @@ module.exports.register = function(info, callback) {
 
   var lecture_id = info['lecture_id'];
   var lecture_title = info['lecture_title'];
-
-  var lecture = {lecture_id: lecture_id, lecture_title: lecture_title};
-  console.log(lecture);
-
-  var query = {username: student_username};
-  Student.findOneAndUpdate(
-    query,
-    {$push: {"lectures": lecture}},
-    {safe: true, upsert: true},
-    callback
-  );
 }
