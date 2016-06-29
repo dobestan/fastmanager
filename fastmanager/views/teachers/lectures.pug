@@ -2,11 +2,13 @@ extends ../layout
 
 
 block content
-    h1 #{user.username}'s lectures <span>( #{ teacher.lectures.length}  )</span>
+    div.container
+        div.row
+            h1 #{user.username}'s lectures <span>( #{ teacher.lectures.length}  )</span>
 
-    ul
-        for lecture in teacher.lectures
-            li
-                a(href="/lectures/" + lecture.lecture_id + "/")
-                    h3= lecture.lecture_title
-                    a(href="/teachers/lectures/" + lecture.lecture_id + "/lessons/new/") 수업 추가하기
+            ul
+                for lecture in teacher.lectures
+                    li
+                        a(href="/lectures/" + lecture.lecture_id + "/")
+                            h3= lecture.lecture_title
+                            a(href="/teachers/lectures/" + lecture.lecture_id + "/lessons/new/") 수업 추가하기

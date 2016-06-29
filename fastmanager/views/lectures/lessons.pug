@@ -2,10 +2,12 @@ extends ../layout
 
 
 block content
-    h1 #{lecture.title}'s Lessons ( <span>#{lecture.lessons.length}</span> )
+    div.container
+        div.row
+            h1 #{lecture.title}'s Lessons ( <span>#{lecture.lessons.length}</span> )
 
-    ul
-        for lesson in lecture.lessons
-            li
-                a(href="/lectures/" + lecture._id + "/lessons/" + lesson.lesson_number)
-                    h3= lesson.lesson_title
+            ul
+                for lesson in lecture.lessons
+                    li
+                        a(href="/lectures/" + lecture._id + "/lessons/" + lesson.lesson_number)
+                            h3= lesson.lesson_title
